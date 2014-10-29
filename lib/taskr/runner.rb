@@ -57,8 +57,9 @@ EOS
         opts.on('-c','--today id1,id2,.. :tag1 :tag2 ..', Array, 'Marks task(s) due today') do |ids|
           today_tag = Task::TagTransforms.find{|k,v| v == ':today'}.first
           tag = Task::TagTransforms.find{|k,v| v == ':tomorrow'}.first
-          tl.tag(ids, [today_tag])
           tl.untag(ids, [tag])
+          tl.untag(ids, [today_tag])
+          tl.tag(ids, [today_tag])
           exit
         end
 
@@ -66,8 +67,9 @@ EOS
           #TODO:cleanup this implementation
           today_tag = Task::TagTransforms.find{|k,v| v == ':today'}.first
           tag = Task::TagTransforms.find{|k,v| v == ':tomorrow'}.first
-          tl.tag(ids, [tag])
           tl.untag(ids, [today_tag])
+          tl.untag(ids, [tag])
+          tl.tag(ids, [tag])
           exit
         end
         #opts.on('today','today','today') do
