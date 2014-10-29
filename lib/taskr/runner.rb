@@ -24,12 +24,12 @@ EOS
           tl.append(ARGV.join(' '))
           exit
         end
-        opts.on('-l', '--list [NUM]', Integer, 'List all the tasks') do |num|
-          tl.list(num||5)
+        opts.on('-l', '--list', 'List all the tasks') do
+          tl.list()
           exit
         end
         opts.on('-L','--list-all' ,'List all the tasks' ) do
-          tl.list(:all)
+          tl.list_all
           exit
         end
         opts.on('-d','--delete id1,id2,..', Array,'Delete tasks(s)' ) do |ids|

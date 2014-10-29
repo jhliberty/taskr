@@ -5,8 +5,12 @@ class TaskList
     @tasks = @lines.map{|x| Task.parse(x)}.sort_by{|x| [x.priority, x.raw_time]}
   end
 
-  def list(num = 5)
-    print num == :all ? @tasks : @tasks.select{|x| x.visible?}.take(num)
+  def list()
+    print @tasks.select{|x| x.visible?}
+  end
+
+  def list_all()
+    print @tasks
   end
 
   def search(q)
