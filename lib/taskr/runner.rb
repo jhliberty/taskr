@@ -53,6 +53,15 @@ EOS
           tl.untag(ids, ARGV)
           exit
         end
+
+        opts.on('-c','--today id1,id2,.. :tag1 :tag2 ..', Array, 'Marks task(s) due today') do |ids|
+          today_tag = Task::TagTransforms.find{|k,v| v == ':today'}.first
+          tag = Task::TagTransforms.find{|k,v| v == ':tomorrow'}.first
+          tl.tag(ids, [today_tag])
+          tl.untag(ids, [tag])
+          exit
+        end
+
         opts.on('-p','--postpone id1,id2,..', Array, 'Postpone task(s) to tomorrow') do |ids|
           #TODO:cleanup this implementation
           today_tag = Task::TagTransforms.find{|k,v| v == ':today'}.first
