@@ -8,12 +8,12 @@ module Taskr
 
         opts.banner =<<EOS
 Usage: taskr [options]
-  Two of the most used options are -l and -a,
+  Two of the most used options are -n and -a,
   and you can use these options without the switches.
 
   e.g.
     $ taskr awesome task here hurray for no switches
-      #adds the task to the list and is equivalent to taskr -a awes..
+      #adds the task to the list and is equivalent to taskr -n awes..
     $ taskr
       #lists all the tasks and is equivalent to 'taskr -l'
 
@@ -26,6 +26,10 @@ EOS
         end
         opts.on('-f', '--find :tag1 :tag2 ..', Array, 'Find all the tasks with specified tag') do |tags|
           tl.find_tags(tags)
+          exit
+        end
+        opts.on('-l', '--list', 'List all the tasks') do
+          tl.list
           exit
         end
         opts.on('-a','--all' ,'List all the tasks' ) do

@@ -8,15 +8,17 @@ Taskr allows you to embed all the information about the task *in* the task.
  - The tags `:weekend, :today, :tomorrow, :tray` have a special meaning.  
    Tasks tagged:
    - `:today` are highlighted in a different color in the listing and get a higher priority.
-   - `:tomorrow` are hidden from the default listing. You can list all tasks using the `-L` switch.
-   - `:weekend` are visible in the default listing only on weekends. You can list all tasks using the `-L` switch.
-   - `:tray` are shown on the top and have a different background color, they have the highest priority. You can put tasks into your tray when you are working on them, or when you want to tackle a bunch of tasks.
+   - `:tomorrow` are hidden from the default listing. You can list all tasks using the `-a` switch.
+   - `:weekend` are visible in the default listing only on weekends. You can list all tasks using the `-a` switch.
+   - `:tray` are shown on the top and have a different background color, they have the highest priority. You can put tasks into your tray when you are working on them, or when you want to tackle a bunch of tasks. You can add tasks to your tray with the `-i` switch.
+   - `:hidden` are hidden from the default listing. You can hide tasks with the `-o` switch and unhide them with the `-O` switch.
 - Tasks which have a bunch of pluses(`+`) get their priority increased by the number of `+`s. On the other hand tasks with minuses(`-`)s in them have lower priorities
 
 Deleted tasks are copied into the `~/.taskr/tasks.taskr.done` file with a timestamp, we can probably add something in the future which allows us to check the time spent on tasks and give more insight into the kind of tasks we work on.
 
 ##Features
   - Tagging of tasks
+  - Search tasks by tag
   - Recurring tasks (available in the [dev branch](https://github.com/minhajuddin/taskr/tarball/dev))
   - Contextual task list which changes based on the day of the week (e.g. you may have some tasks to which you want to be shown only on weekends)
   - Simple and powerful configuration using ruby (available in [dev branch](https://github.com/minhajuddin/taskr/tarball/dev))
@@ -70,28 +72,37 @@ cd ~/.taskr-code/ && rake setup
 ````bash
 $ bin/taskr -h
 Usage: taskr [options]
-  Two of the most used options are -l and -a,
+  Two of the most used options are -n and -a,
   and you can use these options without the switches.
 
   e.g.
     $ taskr awesome task here hurray for no switches
-      #adds the task to the list and is equivalent to taskr -a awes..
+      #adds the task to the list and is equivalent to taskr -n awes..
     $ taskr
       #lists all the tasks and is equivalent to 'taskr -l'
 
 Options:
-    -a, --add task description                Add task to the list
-    -l, --list [NUM]                          List all the tasks
-    -L, --list-all                            List all the tasks
-    -d, --delete id1,id2,..                   Delete tasks(s)
-    -s, --search REGEX                        Search all the tasks
-    -e, --edit                                Open the tasks file in vi
-    -t, --tag id1,id2,.. :tag1 :tag2 ..,      Tag task(s)
-    -u, --untag id1,id2,.. :tag1 :tag2 ..,    Untag task(s)
-    -p, --postpone id1,id2,..                 Postpone task(s) to tomorrow
-    -x, --xmobar                              Text to be shown in xmobar
-    -v, --version                             Display version of taskr
-    -h, --help                                Display this screen
+    -n, --new task description       Adds new task to the list
+    -f, --find :tag1 :tag2 ..        Find all the tasks with specified tag
+    -l, --list                       List all the tasks
+    -a, --all                        List all the tasks
+    -d, --delete id1,id2,..          Delete tasks(s)
+    -o, --hide id1,id2,..            Hide tasks(s)
+    -O, --unhide id1,id2,..          Unhide tasks(s)
+    -i, --tray id1,id2,..            Adds tasks(s) to tray
+    -I, --untray id1,id2,..          Removes tasks(s) from tray
+    -s, --search REGEX               Search all the tasks
+    -e, --edit                       Open the tasks file in vi
+    -t id1,id2,.. :tag1 :tag2 ..,    Tag task(s)
+        --tag
+    -u id1,id2,.. :tag1 :tag2 ..,    Untag task(s)
+        --untag
+    -c id1,id2,.. :tag1 :tag2 ..,    Marks task(s) due today
+        --today
+    -p, --postpone id1,id2,..        Postpone task(s) to tomorrow
+    -x, --xmobar                     Text to be shown in xmobar
+    -v, --version                    Display version of taskr
+    -h, --help                       Display this screen
 
 ````
 
@@ -132,6 +143,7 @@ au BufNewFile,BufRead *.taskr  setf taskr
 
 ##Author
   Created by Khaja Minhajuddin: minhajuddin (at) cosmicvent (dot) com
+  Contributions by John-Henry liberty: @jhliberty
 
 ##Credits
  - Uses colorize `String` extension from https://github.com/fazibear/colorize
