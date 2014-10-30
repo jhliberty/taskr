@@ -67,8 +67,8 @@ EOS
           exit
         end
         opts.on('-e','--edit' ,'Open the tasks file in vi' ) do
-          #TODO: should check the $EDITOR var and use it
-          system("vi #{Filepath}")
+          editor = ENV['EDITOR'].empty? ? 'vi' : ENV['EDITOR']
+          system("#{editor} #{Filepath}")
           exit
         end
         opts.on('-t','--tag id1,id2,.. :tag1 :tag2 ..', Array, 'Tag task(s)') do |ids|
