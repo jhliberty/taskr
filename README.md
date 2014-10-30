@@ -5,7 +5,7 @@
 Taskr allows you to embed all the information about the task *in* the task.
 
  - Any word in a task which begins with `:` is considered a *tag*.
- - The tags `:weekend, :today, :tomorrow, :tray` have a special meaning.  
+ - The tags `:weekend, :today, :tomorrow, :tray, :hidden` have a special meaning.  
    Tasks tagged:
    - `:today` are highlighted in a different color in the listing and get a higher priority.
    - `:tomorrow` are hidden from the default listing. You can list all tasks using the `-a` switch.
