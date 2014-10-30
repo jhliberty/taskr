@@ -92,7 +92,7 @@ Options:
     -i, --tray id1,id2,..            Adds tasks(s) to tray
     -I, --untray id1,id2,..          Removes tasks(s) from tray
     -s, --search REGEX               Search all the tasks
-    -e, --edit                       Open the tasks file in vi
+    -e, --edit                       Open the tasks file in system editor or vi
     -t id1,id2,.. :tag1 :tag2 ..,    Tag task(s)
         --tag
     -u id1,id2,.. :tag1 :tag2 ..,    Untag task(s)
