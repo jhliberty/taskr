@@ -47,6 +47,17 @@ EOS
           tl.output(ids)
           exit
         end
+        opts.on('-i','--tray id1,id2,..', Array,'Adds tasks(s) to tray' ) do |ids|
+          tl.untag(ids, [:tray])
+          tl.tag(ids, [:tray])
+          tl.output(ids)
+          exit
+        end
+        opts.on('-I','--untray id1,id2,..', Array,'Removes tasks(s) from tray' ) do |ids|
+          tl.untag(ids, [:tray])
+          tl.output(ids)
+          exit
+        end
         opts.on('-s','--search REGEX' ,'Search all the tasks' ) do |q|
           tl.search(q)
           exit
