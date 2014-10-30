@@ -141,9 +141,10 @@ au BufNewFile,BufRead *.taskr  setf taskr
  - allow listing of tasks from other *sources*
  - add tab completion
 
-##Author
+##Authors
   Created by Khaja Minhajuddin: minhajuddin (at) cosmicvent (dot) com
-  Contributions by John-Henry liberty: @jhliberty
+
+  Contributions by John-Henry liberty: [@jhliberty](https://twitter.com/jhliberty)
 
 ##Credits
  - Uses colorize `String` extension from https://github.com/fazibear/colorize
