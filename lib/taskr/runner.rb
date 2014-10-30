@@ -20,20 +20,31 @@ Usage: taskr [options]
 Options:
 EOS
 
-        opts.on('-a', '--add task description', :NONE, 'Add task to the list') do
+        opts.on('-n', '--new task description', :NONE, 'Adds new task to the list') do
           tl.append(ARGV.join(' '))
           exit
         end
-        opts.on('-l', '--list', 'List all the tasks') do
-          tl.list()
+        opts.on('-f', '--find :tag1 :tag2 ..', Array, 'Find all the tasks with specified tag') do |tags|
+          tl.find_tags(tags)
           exit
         end
-        opts.on('-L','--list-all' ,'List all the tasks' ) do
+        opts.on('-a','--all' ,'List all the tasks' ) do
           tl.list_all
           exit
         end
         opts.on('-d','--delete id1,id2,..', Array,'Delete tasks(s)' ) do |ids|
           tl.delete(ids)
+          exit
+        end
+        opts.on('-o','--hide id1,id2,..', Array,'Hide tasks(s)' ) do |ids|
+          tl.untag(ids, [:hidden])
+          tl.tag(ids, [:hidden])
+          tl.output(ids)
+          exit
+        end
+        opts.on('-O','--unhide id1,id2,..', Array,'Unhide tasks(s)' ) do |ids|
+          tl.untag(ids, [:hidden])
+          tl.output(ids)
           exit
         end
         opts.on('-s','--search REGEX' ,'Search all the tasks' ) do |q|
@@ -47,10 +58,12 @@ EOS
         end
         opts.on('-t','--tag id1,id2,.. :tag1 :tag2 ..', Array, 'Tag task(s)') do |ids|
           tl.tag(ids, ARGV)
+          tl.output(ids)
           exit
         end
         opts.on('-u','--untag id1,id2,.. :tag1 :tag2 ..', Array, 'Untag task(s)') do |ids|
           tl.untag(ids, ARGV)
+          tl.output(ids)
           exit
         end
 
@@ -60,6 +73,7 @@ EOS
           tl.untag(ids, [tag])
           tl.untag(ids, [today_tag])
           tl.tag(ids, [today_tag])
+          tl.output(ids)
           exit
         end
 
@@ -70,6 +84,7 @@ EOS
           tl.untag(ids, [today_tag])
           tl.untag(ids, [tag])
           tl.tag(ids, [tag])
+          tl.output(ids)
           exit
         end
         #opts.on('today','today','today') do

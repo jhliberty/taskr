@@ -6,7 +6,7 @@ class TaskList
   end
 
   def list()
-    print @tasks.select{|x| x.visible?}
+      print @tasks.find_all(&:visible?)
   end
 
   def list_all()
@@ -26,10 +26,27 @@ class TaskList
     end
   end
 
+  def output(ids)
+    #TODO: should say listing (5/25) tasks
+    tasks = find(ids)
+    puts "(#{tasks.count.to_s.colorize(:red)}) tasks"
+    puts '---------------------'.colorize(:blue)
+    tasks.each do |t|
+      puts t
+    end
+  end
+
   def append(task)
     #TODO: decipher special tags like :today, :tomorrow
     task = task.strip
     File.open(Filepath, 'a') {|f| f.puts "#{Time.now.strftime "%Y%m%d%H%M%S"} #{task}"} unless task.empty?
+  end
+
+  def hide(ids)
+    tasks = find(ids)
+    tag = tagify([:hidden])
+    tasks.each {|task| task.tags += tag }
+    save
   end
 
   def tag(ids, tags)
@@ -38,8 +55,6 @@ class TaskList
 
     tasks.each {|task| task.tags += tags }
     save
-
-    print tasks
   end
 
   def untag(ids, tags)
@@ -49,7 +64,6 @@ class TaskList
     tasks.each {|task| task.tags -= tags }
 
     save
-    print tasks
   end
 
   def delete(ids)
@@ -81,6 +95,18 @@ class TaskList
     return tasks if tasks && !tasks.empty?
     puts 'task(s) not found'.colorize(:red)
     exit
+  end
+
+  def find_tags(tags)
+    # TODO search by multiple tags
+    # TODO search by today tomorrow yesterday
+    tasks = @tasks.find_all{|x| x.tags.include?("#{tags[0]}")}
+    if tasks && !tasks.empty?
+      print tasks
+      exit
+    else
+      puts 'No tasks with that tag found'.colorize(:red)
+    end
   end
 
   def show(id)
