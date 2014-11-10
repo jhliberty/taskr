@@ -5,7 +5,7 @@
 Taskr allows you to embed all the information about the task *in* the task.
 
  - Any word in a task which begins with `:` is considered a *tag*.
- - The tags `:weekend, :today, :tomorrow, :tray, :hidden` have a special meaning.  
+ - The tags `:weekend, :today, :tomorrow, :tray, :hidden` have a special meaning.
    Tasks tagged:
    - `:today` are highlighted in a different color in the listing and get a higher priority.
    - `:tomorrow` are hidden from the default listing. You can list all tasks using the `-a` switch.
@@ -19,7 +19,7 @@ Deleted tasks are copied into the `~/.taskr/tasks.taskr.done` file with a timest
 ##Features
   - Tagging of tasks
   - Search tasks by tag
-  - Recurring tasks (available in the [dev branch](https://github.com/minhajuddin/taskr/tarball/dev))
+  - Recurring tasks (available in the [dev branch](https://github.com/jhliberty/taskr/tarball/dev))
   - Contextual task list which changes based on the day of the week (e.g. you may have some tasks to which you want to be shown only on weekends)
   - Simple and powerful configuration using ruby (available in [dev branch](https://github.com/minhajuddin/taskr/tarball/dev))
   - Highlighting of tasks based on deadline :today
@@ -42,7 +42,7 @@ Taskr stores the tasks in a plain text file in the following format:
 20111115130124 google adwords setup :weekend :20111211 ++
 20110929083045 spool for kindle :weekend +
 20111010161947 setup to take screenshots of stuff on IE7 8 9 chrome firefox :weekend +
-20110915105500 chrome extension with persistent alarm :weekend 
+20110915105500 chrome extension with persistent alarm :weekend
 ````
 
 As you can see it's just a text file with a timestamp for every task.
@@ -53,7 +53,7 @@ Installing taskr is pretty straightforward, run the following commands
 
 ####With git
 ````bash
-git clone git://github.com/minhajuddin/taskr.git ~/.taskr-code
+git clone git://github.com/jhliberty/taskr.git ~/.taskr-code
 ln -s ~/.taskr-code/bin/taskr ~/bin/t
 cd ~/.taskr-code/ && rake setup
 ````
@@ -79,7 +79,7 @@ Usage: taskr [options]
     $ taskr awesome task here hurray for no switches
       #adds the task to the list and is equivalent to taskr -n awes..
     $ taskr
-      #lists all the tasks and is equivalent to 'taskr -l'
+      #lists all the tasks and is equivalent to 'taskr -a'
 
 Options:
     -n, --new task description       Adds new task to the list
@@ -113,15 +113,15 @@ There is a small vim syntax file the vim directory, just copy it to your `~/.vim
 au BufNewFile,BufRead *.taskr  setf taskr
 ````
 ##FAQ
- 1. **Why is it not packaged as a gem?**  
+ 1. **Why is it not packaged as a gem?**
  To make it run faster. More info here: https://gist.github.com/284823
- 2. **Seriously, is 0.5s is gonna make a difference?**  
- *Yes*, This is not just from *my* experience. The perceived slowness of many apps has made me avoid them. [Jeff Atwood post on it is a good read](http://www.codinghorror.com/blog/2011/06/performance-is-a-feature.html)  
+ 2. **Seriously, is 0.5s is gonna make a difference?**
+ *Yes*, This is not just from *my* experience. The perceived slowness of many apps has made me avoid them. [Jeff Atwood post on it is a good read](http://www.codinghorror.com/blog/2011/06/performance-is-a-feature.html)
 
     > [Google found that] the page with 10 results took 0.4 seconds to generate. The page with 30 results took 0.9 seconds. Half a second delay caused a 20% drop in traffic. Half a second delay killed user satisfaction.
     > In A/B tests, [Amazon] tried delaying the page in increments of 100 milliseconds and found that even very small delays would result in substantial and costly drops in revenue.
 
- 3. **How fast is it?**  
+ 3. **How fast is it?**
  Very fast
 
     ````bash
@@ -130,11 +130,11 @@ au BufNewFile,BufRead *.taskr  setf taskr
     user    0m0.040s
     sys     0m0.000s
     ````
- 4. **How is it better than Task Warrior or X?**  
+ 4. **How is it better than Task Warrior or X?**
    It is more hackable. To efficiently use it, you don't have to learn hundreds of switches.
    It's similar to markdown, in that, it allows you to attach info to your task in a way which makes sense.
    Read the usage section.
- 5. **Give me a real reason.**  
+ 5. **Give me a real reason.**
     No one loves a task manager built by others, because everyone has something which they do differently. I created this to suit my workflow and needs. And because it's built in ruby and aims to be configurable, I hope it is easier to personalize.
 
 ##Todo
